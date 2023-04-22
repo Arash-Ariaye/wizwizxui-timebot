@@ -165,6 +165,7 @@ if ($update->message->document->file_id) {
 
 
 $cancelText = '😩 منصرف شدم بیخیال';
+
 $cancelKey=json_encode(['keyboard'=>[
     [['text'=>$cancelText]]
 ],'resize_keyboard'=>true]);
