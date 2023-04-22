@@ -118,6 +118,7 @@ if(isset($update->message)){
     $forward_from_name = $update->message->reply_to_message->forward_sender_name;
     $forward_from_id = $update->message->reply_to_message->forward_from->id;
     $reply_text = $update->message->reply_to_message->text;
+    $contact = $update->message->contact->phone_number;
 }
 if(isset($update->callback_query)){
     $call_id = $update->callback_query->id;
