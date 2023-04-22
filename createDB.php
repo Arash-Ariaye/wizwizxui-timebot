@@ -164,13 +164,10 @@ $connection->query("CREATE TABLE `users` (
   `userid` varchar(40) NOT NULL,
   `name` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
+  `phone` varchar(13) DEFAULT NULL,
   `refcode` varchar(50) NOT NULL,
   `wallet` int(11) NOT NULL DEFAULT 0,
   `date` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci");
-
-
-
-
 ?>
