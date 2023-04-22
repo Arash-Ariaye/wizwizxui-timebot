@@ -9,6 +9,7 @@
 	$botUrl = "[BOTURL]";
 	$walletwizwiz = "[WALLET]";
 	$pursantPercent = [PURSANT];
-    $nowPaymentKey = "[NOWPAYMENTKEY]";
-    $zarinpalId = "[ZARINPALKEY]";
+	$nowPaymentKey = "[NOWPAYMENTKEY]";
+	$zarinpalId = "[ZARINPALKEY]";
+	$valid_country_code = "[COUNTRY_CODE]";
 ?>
