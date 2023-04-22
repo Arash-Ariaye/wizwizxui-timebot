@@ -22,7 +22,7 @@ $botUrl = $fileAddress . "bot.php";
     	$pursant = $_POST['pursant'];
     	$nowPaymentKey= $_POST['nowpaymentkey'];
     	$zarinpalKey = $_POST['zarinpalkey'];
-
+	$valid_country_code = $_POST['country_code'];
     	
     	$connection = new mysqli('localhost',$dbUser,$dbPassword,$dbName);
     	if($connection->connect_error){
@@ -41,8 +41,8 @@ $botUrl = $fileAddress . "bot.php";
         }
 
      	$baseInfo = file_get_contents("../baseInfo.php");
-     	$baseInfo = str_replace(['[NOWPAYMENTKEY]','[ZARINPALKEY]','[BOTTOKEN]','[DBUSERNAME]','[DBPASSWORD]','[DBNAME]','[ADMIN]','[CHANNELLOCK]','[BOTURL]','[WALLET]','[PURSANT]'],
-     	              [$nowPaymentKey, $zarinpalKey, $botToken, $dbUser, $dbPassword, $dbName, $adminId, $channelLock, $fileAddress, $walletMerchant, $pursant],
+     	$baseInfo = str_replace(['[NOWPAYMENTKEY]','[ZARINPALKEY]','[BOTTOKEN]','[DBUSERNAME]','[DBPASSWORD]','[DBNAME]','[ADMIN]','[CHANNELLOCK]','[BOTURL]','[WALLET]','[PURSANT]','[COUNTRY_CODE]'],
+     	              [$nowPaymentKey, $zarinpalKey, $botToken, $dbUser, $dbPassword, $dbName, $adminId, $channelLock, $fileAddress, $walletMerchant, $pursant, $valid_country_code],
      	                        $baseInfo);
         file_put_contents("../baseInfo.php", $baseInfo);
         file_get_contents($fileAddress. "createDB.php");
@@ -142,7 +142,7 @@ function showForm($type){
                                     </div>
                                     <br>
                                 <div>
-        							<a href="./install.php?install">
+        				<a href="./install.php?install">
                                         <button style="background-color: #e0eeee;
                                         border: none;font-weight: 600;color: #000509" type="button">
                                             <span>نصب ربات</span>
@@ -205,6 +205,10 @@ function showForm($type){
                                             </fieldset>
                                             <fieldset>
                                                 <input placeholder="آیدی کانال با @" type="text" name="channelLock" autocomplete="off" required>
+                                            </fieldset>
+						
+                                            <fieldset>
+                                                <input placeholder="کد کشور برای شماره موبایل مثال (98)" type="text" name="country_code" autocomplete="off">
                                             </fieldset>
                                             <fieldset>
                                                 <input placeholder="شماره کارت یا ولت" type="text" name="walletmerchant" autocomplete="off" required>
