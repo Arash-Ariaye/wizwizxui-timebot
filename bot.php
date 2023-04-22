@@ -4,6 +4,32 @@ include_once 'config.php';
 include_once 'jdf.php';
 $robotState = $botState['botState']??"on";
 
+$phonekeys = array(
+	   array(
+	array('text'=>'📲 ارسال شماره تلفن','request_contact'=>true)
+	   )
+);
+if(!empty($contact)){
+	if(strpos($contact, $valid_country_code) === false){
+		$telegram->sendMessage($userid,"⚠️فقط پیش شماره های ($valid_country_code) مجاز است");
+		exit;
+	   }
+	$stmt = $connection->prepare("UPDATE `users` SET `phone` = ? WHERE `userid` = ?");
+	$stmt->bind_param("ii", $contact, $from_id);
+    	$stmt->execute();
+       	$stmt->close();
+	$msg = '✅شماره تلفن شما با موفقیت ثبت شد و می توانید از ربات استفاده کنید';
+	sendMessage($msg);
+	exit;
+}
+$stmt = $connection->prepare("SELECT * FROM `users` WHERE `userid`=?");
+$stmt->bind_param("i", $from_id);
+$stmt->execute();
+$res = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+if($res['phone'] == '' and $valid_country_code != ''){
+	sendMessage('شماره موبایل خود را با دکمه زیر به اشتراک بگذارید تا ثبت نام شما تایید شود و بتوانید از ربات استفاده کنید', $phonekeys);
+}
 if($userInfo['step'] == "banned"){
     sendMessage("❌ | هی بهت گفتم آدم باش گوش نکردی ، الان مسدود شدی 😑😂");
     exit();
